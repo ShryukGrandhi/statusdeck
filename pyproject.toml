@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "statusdeck"
+version = "0.1.0"
+description = "Turn an Excel project tracker into a live-formula Excel status workbook and a PowerPoint status deck (CPM, earned value, Monte Carlo schedule risk)."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Shryuk Grandhi" }]
+dependencies = [
+  "openpyxl>=3.1",
+  "python-pptx>=1.0",
+  "numpy>=1.24",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7", "pycel>=1.0b30"]
+
+[project.scripts]
+statusdeck = "statusdeck.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+filterwarnings = ["ignore::DeprecationWarning:pycel.*", "ignore::DeprecationWarning:ast"]
