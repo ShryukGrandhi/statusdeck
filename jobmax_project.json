@@ -1,0 +1,29 @@
+{
+  "name": "statusdeck",
+  "language": "Python",
+  "tech": [
+    "Microsoft Excel (openpyxl, live formulas, conditional formatting)",
+    "PowerPoint (python-pptx)",
+    "Critical Path Method",
+    "Earned Value Management",
+    "Monte Carlo simulation (numpy)",
+    "GitHub Actions CI"
+  ],
+  "targets": [
+    "PowerPoint",
+    "Microsoft Excel",
+    "Program/project management reporting (schedule, cost, risk)",
+    "Data analysis and executive status communication"
+  ],
+  "bullets": [
+    "Built a Python tool turning a Microsoft Excel project tracker into a live-formula Excel status workbook and PowerPoint deck; 5,207/5,207 formula cells verified by pycel recalc",
+    "Implemented critical path (CPM), earned value (SPI/CPI/EAC) and numpy Monte Carlo schedule risk: 10,000 iterations on 500 tasks in 0.073 s, within 0.065% of closed-form result",
+    "Automated PowerPoint status reporting with native editable charts, RAG KPI tiles, Gantt and risk heat map; 60-task tracker to Excel workbook + deck in 0.121 s, tested in GitHub Actions"
+  ],
+  "summary": {
+    "what": "A command-line tool that reads a program tracker in Excel (tasks, dependencies, three-point estimates, budget, progress, risks) and produces an Excel status workbook whose schedule, earned value and risk sheets are live formulas, plus an 8-slide PowerPoint status deck with native charts, RAG KPI tiles, a critical-path Gantt and a risk heat map.",
+    "how": "Python with openpyxl and python-pptx. A CPM engine does forward/backward passes with lags and float; earned value is computed as of the status date; a numpy Monte Carlo runs the CPM passes across all iterations at once to get P50/P80 finish dates and task criticality. The workbook writer emits the same rules as Excel formulas (MAX/MIN over predecessor cells, IF, INDEX, COUNTIF(S), named ranges, formula-based conditional formatting for the Gantt) and returns the value it expects in each cell, so tests recalculate the saved file with pycel and compare all cells.",
+    "hardest": "Keeping Python and Excel in exact agreement: every convention (lags, negative-lag clamping, milestones, working-day calendar, status-date elapsed days, RAG thresholds) had to be expressed identically in both, and proven by an independent formula engine, including after editing a duration or the status date inside the saved workbook.",
+    "say": "I built a tool that takes a project tracker in Excel and generates a status workbook and PowerPoint deck automatically. The workbook isn't pasted numbers: the critical path, earned value and risk scores are real Excel formulas, and I verified all 5,207 formula cells on a 300-task plan by recalculating the file with an independent Excel engine. It also runs a Monte Carlo schedule simulation, which on the example shows the most-likely plan has almost no chance of holding because of merge bias across parallel paths."
+  }
+}
